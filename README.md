@@ -63,6 +63,7 @@ As we can see in the example gauge image, this value is almost 100% accurate.
 ## Todo
 
 - Prometheus Integration to show values in Grafana Dashboards and add alerts for certain tresholds
+- Add support for periodically checking camera / video input
 
 ## About
 
