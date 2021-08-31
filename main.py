@@ -1,12 +1,18 @@
+import logging
 import os
 import math
-
 import cv2 as cv
 import numpy as np
 import statistics
 
 BAR_MIN = 0.95
 LINES_ABOVE_Y = 310
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
 
 
 def get_bar_from_angle(angle):
@@ -19,7 +25,7 @@ def measure_gauge_from_image(filename):
     src = cv.imread(cv.samples.findFile(filename), cv.IMREAD_GRAYSCALE)
     # Check if image is loaded fine
     if src is None:
-        print('Error opening image!')
+        logger.error('Error opening image!')
         return -1
 
     dst = cv.Canny(src, 50, 200, None, 3)
@@ -40,13 +46,11 @@ def measure_gauge_from_image(filename):
             if l[3] < LINES_ABOVE_Y:
                 cv.line(cdstP, (l[0], l[1]), (l[2], l[3]), (0, 0, 255), 3, cv.LINE_AA)
                 cv.putText(cdstP, str(counter), (l[2] + 5, l[3] + 5), cv.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 2)
-                print("line " + str(counter) + ": " + str(l[0]) + ", " + str(l[1]))
-                print("line " + str(counter) + ": " + str(l[2]) + ", " + str(l[3]))
-
-                print()
+                logger.debug("line " + str(counter) + ": " + str(l[0]) + ", " + str(l[1]))
+                logger.debug("line " + str(counter) + ": " + str(l[2]) + ", " + str(l[3]))
 
                 angle = math.degrees(math.atan2(l[0] - l[1], l[2] - [3]))
-                print("line " + str(counter) + " angle = " + str(angle))
+                logger.debug("line " + str(counter) + " angle = " + str(angle))
                 angles.append(angle)
 
                 counter = counter + 1
@@ -56,10 +60,10 @@ def measure_gauge_from_image(filename):
     # cv.imshow(filename, cdstP)
 
     avg_angle = statistics.mean(angles)
-    print("avg angle = " + str(int(avg_angle)) + "°")
+    logger.info("avg angle = " + str(int(avg_angle)) + "°")
 
     bar = get_bar_from_angle(avg_angle)
-    print("bar = " + str(bar))
+    logger.info("bar = " + str(bar))
 
     cv.waitKey()
     return 0
@@ -72,7 +76,8 @@ if __name__ == "__main__":
     for filename in os.listdir(dir):
         if filename.endswith(".jpg"):
             file_name = os.path.join(dir, filename)
-            print(file_name)
+
+            logger.info(file_name)
             measure_gauge_from_image(file_name)
         else:
             continue
