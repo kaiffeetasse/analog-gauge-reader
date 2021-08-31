@@ -9,6 +9,11 @@ BAR_MIN = 0.95
 LINES_ABOVE_Y = 310
 
 
+def get_bar_from_angle(angle):
+    bar = 0.0175153 * angle + 1.50967
+    return bar
+
+
 def measure_gauge_from_image(filename):
     # Loads an image
     src = cv.imread(cv.samples.findFile(filename), cv.IMREAD_GRAYSCALE)
@@ -38,6 +43,8 @@ def measure_gauge_from_image(filename):
                 print("line " + str(counter) + ": " + str(l[0]) + ", " + str(l[1]))
                 print("line " + str(counter) + ": " + str(l[2]) + ", " + str(l[3]))
 
+                print()
+
                 angle = math.degrees(math.atan2(l[0] - l[1], l[2] - [3]))
                 print("line " + str(counter) + " angle = " + str(angle))
                 angles.append(angle)
@@ -51,7 +58,7 @@ def measure_gauge_from_image(filename):
     avg_angle = statistics.mean(angles)
     print("avg angle = " + str(int(avg_angle)) + "°")
 
-    bar = 0.0175153 * avg_angle + 1.50967
+    bar = get_bar_from_angle(avg_angle)
     print("bar = " + str(bar))
 
     cv.waitKey()
