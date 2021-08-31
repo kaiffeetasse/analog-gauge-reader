@@ -64,4 +64,6 @@ As we can see in the example gauge image, this value is almost 100% accurate.
 
 - Prometheus Integration to show values in Grafana Dashboards and add alerts for certain tresholds
 
+## About
+
 See https://docs.opencv.org/3.4/d9/db0/tutorial_hough_lines.html for more information about the OpenCV Hough Line Transform.
