@@ -45,7 +45,7 @@ For a better representation, numbers are attached to the respective lines in the
 ![line_detection_2](images/detected_lines_2.png)
 
 For measurement of the angle of the lines, we use the `atan2` [function](https://en.wikipedia.org/wiki/Atan2), which is an extended version of the trigonometric inverse tangent function.
-To accomplish this, we calculate the angles between all the vectors that make up the lines and take the average of them.
+With that function we calculate the angles between all the vectors that make up the lines and take the average of them.
 This value is then substituted  into our equation described above (`f(x) ≈ 0.0179735x + 1.5249`) to obtain the desired pressure value in bar.
 
 ### Example
@@ -54,8 +54,8 @@ In the image above, the algorithm detects an average angle of -15°. If we put t
 
 ```
 f(x) ≈ 0.0179735x + 1.5249
-f(x) ≈ 0.0179735 * -15 + 1.5249
-f(x) ≈ 1.2552975 bar
+f(x) = 0.0179735 * -15 + 1.5249
+f(x) = 1.2552975 bar
 ```
 
 As we can see in the example gauge image, this value is almost 100% accurate.
