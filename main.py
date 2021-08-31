@@ -70,7 +70,7 @@ def measure_gauge_from_image(filename):
 
 if __name__ == "__main__":
 
-    dir = "gauge_images"
+    dir = "images/gauges"
 
     for filename in os.listdir(dir):
         if filename.endswith(".jpg"):

@@ -7,7 +7,7 @@ This is a python application which takes an image or video frame of an analog ga
 To convert the calculated angels of the detected lines we need some reference angels and their associated values.
 You can find the example images used to calibrate our gauge reader in the [gauge_images](gauge_images) directory. 
 
-![gauge](gauge_images/gauge.jpg)
+![gauge](images/gauges/gauge.jpg)
 
 *Example Gauge showing ~1.25 bar*
 
